@@ -20,7 +20,7 @@ SAVED_NEWS_DIR.mkdir(parents=True, exist_ok=True)
     "daily_60s_news",
     "CJSen",
     "这是 AstrBot 的一个每日60s新闻插件。支持定时发送和命令发送",
-    "1.0.0",
+    "1.0.4",
 )
 class Daily60sNewsPlugin(Star):
     """
@@ -34,6 +34,7 @@ class Daily60sNewsPlugin(Star):
         self.news_path = SAVED_NEWS_DIR
         self.groups = self.config.groups
         self.push_time = self.config.push_time
+        self.news_api = self.config.news_api
         logger.info(f"插件配置: {self.config}")
         # 启动定时任务
         self._monitoring_task = asyncio.create_task(self._daily_task())
@@ -189,7 +190,10 @@ class Daily60sNewsPlugin(Star):
         date = datetime.datetime.now().strftime("%Y-%m-%d")
         for attempt in range(retries):
             try:
-                url = f"https://60s-api.viki.moe/v2/60s?date={date}&encoding={url_type}"
+                if self.news_api:
+                    url = f"{self.news_api}?date={date}&encoding={url_type}"
+                else:
+                    url = f"https://60s-api.viki.moe/v2/60s?date={date}&encoding={url_type}"
                 logger.info(f"开始下载新闻文件:{url}...")
                 async with aiohttp.ClientSession() as session:
                     async with session.get(url, timeout=timeout) as response:
