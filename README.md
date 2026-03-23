@@ -27,41 +27,9 @@
 
 3. groups配置格式，在机器人所在群聊中发送"/sid"获取相关信息。其中SID为群聊ID，即配置页面中的groups参数
 /sid回复格式：
-```
-SID: aiocqhttp:GroupMessage:987654321 此 ID 可用于设置会话白名单。
-/wl <SID> 添加白名单, /dwl <SID> 删除白名单。
-
-UID: 12345678 此 ID 可用于设置管理员。
-op <UID> 授权管理员, /deop <UID> 取消管理员。
-```
-
-解释说明：群聊唯一标识符分为: 前缀:中缀:后缀
-
-下面是所有可选的群组唯一标识符前缀:
-| 平台                                | 群组唯一标识符前缀     |
-|-------------------------------------|------------------------|
-| qq, napcat, Lagrange 之类的         | aiocqhttp              |
-| qq 官方 bot                         | qq_official            |
-| telegram                            | telegram               |
-| 钉钉                                | dingtalk               |
-| wechatpadpro微信                    | wechatpadpro           |
-| gewechat 微信(虽然已经停止维护)     | gewechat               |
-| lark                                | lark                   |
-| qq webhook 方法                     | qq_official_webhook    |
-| astrbot 网页聊天界面                | webchat                |
-
-下面是所有可选的群组唯一标识符中缀:
-| 群组唯一标识符中缀   | 描述       |
-|----------------------|------------|
-| GroupMessage         | 群组消息   |
-| FriendMessage        | 私聊消息   |
-| OtherMessage         | 其他消息   |
-
-后缀：/sid中获取的UID
-最终组合结果类似：
-```text
-wechatpadpro:GroupMessage:123456789@chatroom
-```
+![sid](./static/sid.png)
+将图中红框部分的umo（即sid）复制添加到配置文件中即可：
+![config](./static/config.png)
 
 ## 使用方法
 
