@@ -121,6 +121,38 @@ class Daily60sNewsPlugin(Star):
             f"{event.get_sender_name()}:今日新闻文件已更新,文字新闻简略内容:\n{text_content[:50]}..."
         )
 
+    @filter.permission_type(filter.PermissionType.ADMIN)
+    @mnews.command("save_group")
+    async def update_news_files(self, event: AstrMessageEvent):
+        """
+        保存当前群组（仅管理员）
+        """
+        session_id = event.unified_msg_origin
+
+        if session_id not in self.groups:
+            self.groups.append(session_id)
+            self.config["groups"] = self.groups
+            self.config.save_config()
+            yield event.plain_result(f"已保存当前群组！")
+        else:
+            yield event.plain_result(f"无法重复保存群组！")
+
+    @filter.permission_type(filter.PermissionType.ADMIN)
+    @mnews.command("remove_group")
+    async def update_news_files(self, event: AstrMessageEvent):
+        """
+        移除当前群组（仅管理员）
+        """
+        session_id = event.unified_msg_origin
+
+        if session_id in self.groups:
+            self.groups.remove(session_id)
+            self.config["groups"] = self.groups
+            self.config.save_config()
+            yield event.plain_result(f"已移除当前群组！")
+        else:
+            yield event.plain_result(f"无法重复移除群组！")
+
     async def terminate(self):
         """插件卸载时调用"""
         if self._monitoring_task:
