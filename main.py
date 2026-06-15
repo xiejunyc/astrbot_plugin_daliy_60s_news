@@ -253,7 +253,7 @@ class Daily60sNewsPlugin(Star):
         """
         推送新闻到所有目标群组
         """
-        for target in self.config.groups:
+        for target in self.groups:
             try:
                 if self.news_type == "text":
                     news_content, _ = await self._get_text_news()
