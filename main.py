@@ -123,7 +123,7 @@ class Daily60sNewsPlugin(Star):
 
     @filter.permission_type(filter.PermissionType.ADMIN)
     @mnews.command("save_group")
-    async def update_news_files(self, event: AstrMessageEvent):
+    async def news_save_group(self, event: AstrMessageEvent):
         """
         保存当前群组（仅管理员）
         """
@@ -139,7 +139,7 @@ class Daily60sNewsPlugin(Star):
 
     @filter.permission_type(filter.PermissionType.ADMIN)
     @mnews.command("remove_group")
-    async def update_news_files(self, event: AstrMessageEvent):
+    async def news_remove_group(self, event: AstrMessageEvent):
         """
         移除当前群组（仅管理员）
         """
